@@ -64,3 +64,6 @@ jobs:
 
       - name: Terraform Apply
         run: cd terraform && terraform apply -auto-approve
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp_credentials.json  
+
