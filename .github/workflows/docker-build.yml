@@ -56,15 +56,13 @@ jobs:
         with:
           terraform_version: 1.3.0  # Reemplaza con la versión que necesites
 
+
       - name: Configure Google Cloud credentials
-        run: | 
-          echo "${{ secrets.GCP_CREDENTIALS }}" > $HOME/gcp_credentials.json
-          cat $HOME/gcp_credentials.json
-          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/gcp_credentials.json" >> $GITHUB_ENV
+        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GCP_CREDENTIALS }}" >> $GITHUB_ENV
+
       - name: Terraform Init
         run: cd terraform && terraform init
-      
-   
+         
 
       - name: Terraform Apply
         run: cd terraform && terraform apply -auto-approve
