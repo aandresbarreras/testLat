@@ -50,6 +50,12 @@ jobs:
           push: true
           tags: aandresbarreras/data:latest
 
+
+      
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
