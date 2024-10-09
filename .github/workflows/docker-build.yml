@@ -37,3 +37,18 @@ jobs:
           context: .
           push: true
           tags: aandresbarreras/apilat:latest
+
+      - name: Build and push ingest Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./ingest
+          push: true
+          tags: aandresbarreras/apilat:latest
+
+      - name: Build and push data Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./data
+          push: true
+          tags: aandresbarreras/data:latest
+          
