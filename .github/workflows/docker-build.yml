@@ -51,14 +51,17 @@ jobs:
           tags: aandresbarreras/data:latest
 
 
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.3.0  # Reemplaza con la versión que necesites
 
 
-      - name: Configure Google Cloud credentials
-        run: echo "GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GCP_CREDENTIALS }}" >> $GITHUB_ENV
+
 
       - name: Terraform Init
         run: cd terraform && terraform init
