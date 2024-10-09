@@ -41,14 +41,14 @@ jobs:
       - name: Build and push ingest Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./ingest
+          context: ./api/ingest
           push: true
           tags: aandresbarreras/apilat:latest
 
       - name: Build and push data Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./data
+          context: ./api/data
           push: true
           tags: aandresbarreras/data:latest
           
