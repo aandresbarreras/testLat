@@ -22,7 +22,7 @@ En el proceso de integración continua, se realiza un análisis de código está
 El servicio de Ingest utiliza el método POST para ingresar datos en la base de datos de MongoDB.
 
 Endpoint para POST: https://data-ingest-q3al6muwza-uc.a.run.app/ingest
-2.4 Diagrama de Arquitectura
+2.4![DIAGRAMA](https://github.com/user-attachments/assets/d0f618bf-d80a-4c4f-94db-be4bef825f00)
 
 
 Lo demás está en progreso.
