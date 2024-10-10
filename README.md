@@ -1,5 +1,6 @@
 test Latam
 1. Arquitectura de la Solución
+
 1.1 Infraestructura en la Nube
 Se utilizó Google Cloud Platform (GCP) para desplegar dos instancias de Cloud Run. Este enfoque sigue las recomendaciones para mantener la simplicidad y funcionalidad. Las instancias utilizan imágenes separadas:
 
