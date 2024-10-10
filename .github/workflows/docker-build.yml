@@ -65,7 +65,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy data-service \
+          gcloud run deploy data-ingest \
             --image aandresbarreras/ingest:1 \
             --region us-central1 \
             --platform managed \
