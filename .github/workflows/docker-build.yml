@@ -54,19 +54,21 @@ jobs:
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.3.0  # Reemplaza con la versión que necesites
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy data-service \
+            --image aandresbarreras/data:latest \
+            --region us-central1 \
+            --platform managed \
+            --project=lat-test-437905
 
 
-
-
-      - name: Terraform Init
-        run: cd terraform && terraform init
-         
-
-      - name: Terraform Apply
-        run: cd terraform && terraform apply -auto-approve
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy data-service \
+            --image aandresbarreras/ingest:1 \
+            --region us-central1 \
+            --platform managed \
+            --project=lat-test-437905            
 
 
