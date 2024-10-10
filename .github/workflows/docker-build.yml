@@ -11,14 +11,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
       - name: SonarCloud Scan
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis      
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}                        
-                        
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
+      - name: Remove .scannerwork directory with sudo
+        run: sudo rm -rf .scannerwork
+
       - name: Check out repository
         uses: actions/checkout@v2
 
@@ -31,19 +35,12 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: aandresbarreras/apilat:latest
-
       - name: Build and push ingest Docker image
         uses: docker/build-push-action@v2
         with:
           context: ./api/ingest
           push: true
-          tags: aandresbarreras/apilat:latest
+          tags: aandresbarreras/ingest:latest
 
       - name: Build and push data Docker image
         uses: docker/build-push-action@v2
@@ -51,4 +48,25 @@ jobs:
           context: ./api/data
           push: true
           tags: aandresbarreras/data:latest
-          
+
+
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS_JSON }}'
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.0  # Reemplaza con la versión que necesites
+
+
+
+
+      - name: Terraform Init
+        run: cd terraform && terraform init
+         
+
+      - name: Terraform Apply
+        run: cd terraform && terraform apply -auto-approve
+
+
