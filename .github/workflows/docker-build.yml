@@ -60,7 +60,7 @@ jobs:
         run: |
           gcloud run deploy data-service \
             --image aandresbarreras/data:latest \
-            --update-env-vars MONGODB_URI \
+            --update-env-vars MONGODB_URI=${{ secrets.MONGODB_URI }} \
             --region us-central1 \
             --platform managed \
             --project=lat-test-437905
