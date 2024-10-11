@@ -1,10 +1,8 @@
 
-name: Build and Push Docker Image
+name: implement infra
 
 on:
-  push:
-    branches:
-      - feature/icdc
+  workflow_dispatch:  # Permite ejecutar el flujo manualmente
 
 jobs:
   build:

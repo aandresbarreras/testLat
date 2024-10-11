@@ -60,16 +60,18 @@ jobs:
         run: |
           gcloud run deploy data-service \
             --image aandresbarreras/data:latest \
-            --update-env MONGODB_URI="${{ secrets.MONGODB_URI }}" \
+            --update-env-vars MONGODB_URI=${{ secrets.MONGODB_URI }} \
             --region us-central1 \
             --platform managed \
             --project=lat-test-437905
 
       - name: Deploy to Cloud Run
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}      
         run: |
           gcloud run deploy data-ingest \
             --image aandresbarreras/ingest:1 \
-            --update-env MONGODB_URI="${{ secrets.MONGODB_URI }}" \
+            --update-env-vars MONGODB_URI=${{ secrets.MONGODB_URI }} \
             --region us-central1 \
             --platform managed \
             --project=lat-test-437905            
