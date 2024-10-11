@@ -70,7 +70,7 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}      
         run: |
           gcloud run deploy data-ingest \
-            --image aandresbarreras/ingest:1 \
+            --image aandresbarreras/ingest:latest \
             --update-env-vars MONGODB_URI=${{ secrets.MONGODB_URI }} \
             --region us-central1 \
             --platform managed \
